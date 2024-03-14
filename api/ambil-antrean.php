@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../database.php';
+
 $id_lokasi = 0;
 $id_loket = 0;
 $id_jenis_loket = 0;

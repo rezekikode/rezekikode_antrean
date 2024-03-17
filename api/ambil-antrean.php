@@ -3,8 +3,8 @@
 require_once __DIR__ . '/../database.php';
 
 $id_lokasi = 0;
+$id_layanan = 0;
 $id_loket = 0;
-$id_jenis_loket = 0;
 $metode = $_SERVER['REQUEST_METHOD'];
 
 if ($metode !== 'post') {
@@ -16,10 +16,10 @@ $query =
     SELECT 
     MAX(nomor) AS nomor
     FROM 
+    antrean
     WHERE 
-    id_lokasi = :id_lokasi 
-    AND id_loket = :id_loket 
-    AND id_jenis_lokasi = :id_jenis_loket
+    lokasi_id = :lokasi_id 
+    AND layanan_id = :layanan_id
     ";
 
 $nomor_sekarang = $nomor + 1;

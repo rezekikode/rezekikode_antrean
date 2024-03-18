@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\AntreanController;
+use App\Http\Controllers\AntreanPanggilController;
+use App\Http\Controllers\LayananController;
 use App\Http\Controllers\LokasiController;
+use App\Http\Controllers\LoketController;
 use App\Http\Resources\AntreanCollection;
 use App\Http\Resources\AntreanPanggilCollection;
 use App\Http\Resources\LayananCollection;
@@ -44,3 +48,7 @@ Route::get('/collection/antrean-panggil', function () {
 });
 
 Route::resource('/resource/lokasi', LokasiController::class);
+Route::resource('/resource/layanan', LayananController::class);
+Route::resource('/resource/loket', LoketController::class);
+Route::resource('/resource/antrean', AntreanController::class);
+Route::resource('/resource/antrean-panggil', AntreanPanggilController::class);

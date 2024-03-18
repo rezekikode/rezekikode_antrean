@@ -79,6 +79,26 @@ Route::get('ambil', function (Request $request) {
     return view('ambil/index', compact('layanans'));
 })->name('ambil');
 
-Route::get('panggil', function () {
-    return view('panggil/index');
-});
+Route::get('panggil', function (Request $request) {
+    $id = $request->input('id');
+    $dt = Carbon::now();
+    if ($id > 0) {
+        $antrean = Antrean::find($id);
+        $antrean->status = 'memanggil';
+        $antrean->save();
+        if ($antrean) {
+            $antreanPanggil = new AntreanPanggil();
+            $antreanPanggil->antrean_id = $id;
+            $antreanPanggil->loket_id = 1;
+            $antreanPanggil->tanggal_panggil = $dt->toDateString();
+            $antreanPanggil->waktu_panggil = $dt->toTimeString();
+            $antreanPanggil->status = 'memanggil';
+            $antreanPanggil->save();
+        }
+        return redirect()->route('panggil');
+    }
+    $antreans = Antrean::where('status', '=', 'menunggu')
+        ->orderBy('nomor')
+        ->get();
+    return view('panggil/index', compact('antreans'));
+})->name('panggil');

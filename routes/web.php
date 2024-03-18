@@ -56,3 +56,5 @@ Route::prefix('resource')->group(function () {
     Route::resource('antrean', AntreanController::class);
     Route::resource('antrean-panggil', AntreanPanggilController::class);
 });
+
+Route::view('/ambil', 'ambil/index');

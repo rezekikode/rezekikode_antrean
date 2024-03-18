@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('antreans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('layanan_id')->constrained();
+            $table->date('tanggal_ambil');
+            $table->time('waktu_ambil');
+            $table->string('nomor');
+            $table->string('status');
             $table->timestamps();
         });
     }

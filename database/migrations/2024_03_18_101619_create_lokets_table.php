@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('lokets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('layanan_id')->constrained();
+            $table->string('loket');
+            $table->string('status');
             $table->timestamps();
         });
     }

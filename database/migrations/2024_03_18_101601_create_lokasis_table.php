@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('lokasis', function (Blueprint $table) {
             $table->id();
+            $table->string('lokasi');
+            $table->string('status');
             $table->timestamps();
         });
     }

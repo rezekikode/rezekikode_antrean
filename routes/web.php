@@ -17,6 +17,8 @@ use App\Models\Layanan;
 use App\Models\Lokasi;
 use App\Models\Loket;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -57,5 +59,26 @@ Route::prefix('resource')->group(function () {
     Route::resource('antrean-panggil', AntreanPanggilController::class);
 });
 
-Route::view('/ambil', 'ambil/index');
-Route::view('/panggil', 'panggil/index');
+Route::get('ambil', function (Request $request) {
+    $id = $request->input('id');
+    $dt = Carbon::now();
+    if ($id > 0) {
+        $antrean = new Antrean();
+        $antrean->layanan_id = $id;
+        $antrean->tanggal_ambil = $dt->toDateString();
+        $antrean->waktu_ambil = $dt->toTimeString();
+        $antrean->nomor = Antrean::where('layanan_id', '=', $id)
+            ->where('tanggal_ambil', '=', $dt->toDateString())
+            ->max('nomor') + 1;
+        $antrean->status = 'menunggu';
+        $antrean->save();
+        return redirect()->route('ambil');
+    }
+    $layanans = Layanan::where('status', '=', 'aktif')
+        ->get();
+    return view('ambil/index', compact('layanans'));
+})->name('ambil');
+
+Route::get('panggil', function () {
+    return view('panggil/index');
+});

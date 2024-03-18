@@ -58,3 +58,4 @@ Route::prefix('resource')->group(function () {
 });
 
 Route::view('/ambil', 'ambil/index');
+Route::view('/panggil', 'panggil/index');

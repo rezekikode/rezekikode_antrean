@@ -23,32 +23,36 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/collection/users', function () {
-    return new UserCollection(User::all());
+Route::prefix('collection')->group(function () {
+    Route::get('users', function () {
+        return new UserCollection(User::all());
+    });
+
+    Route::get('lokasi', function () {
+        return new LokasiCollection(Lokasi::all());
+    });
+
+    Route::get('layanan', function () {
+        return new LayananCollection(Layanan::all());
+    });
+
+    Route::get('loket', function () {
+        return new LoketCollection(Loket::all());
+    });
+
+    Route::get('antrean', function () {
+        return new AntreanCollection(Antrean::all());
+    });
+
+    Route::get('antrean-panggil', function () {
+        return new AntreanPanggilCollection(AntreanPanggil::all());
+    });
 });
 
-Route::get('/collection/lokasi', function () {
-    return new LokasiCollection(Lokasi::all());
+Route::prefix('resource')->group(function () {
+    Route::resource('lokasi', LokasiController::class);
+    Route::resource('layanan', LayananController::class);
+    Route::resource('loket', LoketController::class);
+    Route::resource('antrean', AntreanController::class);
+    Route::resource('antrean-panggil', AntreanPanggilController::class);
 });
-
-Route::get('/collection/layanan', function () {
-    return new LayananCollection(Layanan::all());
-});
-
-Route::get('/collection/loket', function () {
-    return new LoketCollection(Loket::all());
-});
-
-Route::get('/collection/antrean', function () {
-    return new AntreanCollection(Antrean::all());
-});
-
-Route::get('/collection/antrean-panggil', function () {
-    return new AntreanPanggilCollection(AntreanPanggil::all());
-});
-
-Route::resource('/resource/lokasi', LokasiController::class);
-Route::resource('/resource/layanan', LayananController::class);
-Route::resource('/resource/loket', LoketController::class);
-Route::resource('/resource/antrean', AntreanController::class);
-Route::resource('/resource/antrean-panggil', AntreanPanggilController::class);

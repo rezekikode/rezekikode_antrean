@@ -18,5 +18,11 @@ class LoketSeeder extends Seeder
             'loket' => '1',
             'status' => 'aktif'
         ]);
+
+        DB::table('lokets')->insert([
+            'layanan_id' => 2,
+            'loket' => '1',
+            'status' => 'aktif'
+        ]);
     }
 }

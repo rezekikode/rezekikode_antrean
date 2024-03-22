@@ -25,6 +25,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//--- Collection
 Route::prefix('collection')->group(function () {
     Route::get('users', function () {
         return new UserCollection(User::all());
@@ -51,6 +52,7 @@ Route::prefix('collection')->group(function () {
     });
 });
 
+//--- Resource
 Route::prefix('resource')->group(function () {
     Route::resource('lokasi', LokasiController::class);
     Route::resource('layanan', LayananController::class);
@@ -59,6 +61,7 @@ Route::prefix('resource')->group(function () {
     Route::resource('antrean-panggil', AntreanPanggilController::class);
 });
 
+//--- Ambil
 Route::get('ambil', function (Request $request) {
     $id = $request->input('id');
     $dt = Carbon::now();
@@ -79,6 +82,7 @@ Route::get('ambil', function (Request $request) {
     return view('ambil/index', compact('layanans'));
 })->name('ambil');
 
+//--- Panggil
 Route::get('panggil', function (Request $request) {
     $id = $request->input('id');
     $dt = Carbon::now();

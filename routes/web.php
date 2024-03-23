@@ -104,21 +104,26 @@ Route::get('panggil', function (Request $request) {
         if ($antrean) {
             $antreanPanggil = new AntreanPanggil();
             $antreanPanggil->antrean_id = $antrean_id;
-            $antreanPanggil->loket_id = 1;
+            $antreanPanggil->loket_id = $loket_id;
             $antreanPanggil->tanggal_panggil = $dt->toDateString();
             $antreanPanggil->waktu_panggil = $dt->toTimeString();
             $antreanPanggil->status = 'memanggil';
             $antreanPanggil->save();
         }
-        return redirect()->route('panggil');
+        return redirect()->route('panggil', ['loket_id' => $loket_id]);
     }
 
     $lokets = Loket::all();
 
-    $antreans = Antrean::where('status', '=', 'menunggu')
+    $antrean_menunggu = Antrean::where('status', '=', 'menunggu')
         ->where('layanan_id', '=', $layanan_id)
         ->orderBy('nomor')
         ->get();
 
-    return view('panggil/index', compact('lokets', 'antreans', 'loket_id'));
+    $antrean_memanggil = Antrean::where('status', '=', 'memanggil')
+        ->where('layanan_id', '=', $layanan_id)
+        ->orderBy('nomor')
+        ->get();
+
+    return view('panggil/index', compact('lokets', 'antrean_menunggu', 'antrean_memanggil', 'loket_id'));
 })->name('panggil');

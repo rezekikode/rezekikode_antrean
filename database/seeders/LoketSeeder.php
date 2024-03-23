@@ -15,13 +15,13 @@ class LoketSeeder extends Seeder
     {
         DB::table('lokets')->insert([
             'layanan_id' => 1,
-            'loket' => '1',
+            'loket' => 'Loket 1',
             'status' => 'aktif'
         ]);
 
         DB::table('lokets')->insert([
             'layanan_id' => 2,
-            'loket' => '1',
+            'loket' => 'Loket 1',
             'status' => 'aktif'
         ]);
     }

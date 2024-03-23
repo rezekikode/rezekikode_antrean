@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lokets', function (Blueprint $table) {
-            $table->id();
-            $table->string('loket');
-            $table->string('status');
+        Schema::create('layanan_loket', function (Blueprint $table) {
+            $table->foreignId('layanan_id')->constrained();
+            $table->foreignId('loket_id')->constrained();            
             $table->timestamps();
+            $table->primary(['layanan_id', 'loket_id']);
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lokets');
+        Schema::dropIfExists('layanan_loket');
     }
 };

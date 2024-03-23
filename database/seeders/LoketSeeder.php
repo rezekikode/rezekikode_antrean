@@ -14,15 +14,23 @@ class LoketSeeder extends Seeder
     public function run(): void
     {
         DB::table('lokets')->insert([
-            'layanan_id' => 1,
             'loket' => 'Loket 1',
             'status' => 'aktif'
         ]);
 
         DB::table('lokets')->insert([
-            'layanan_id' => 2,
-            'loket' => 'Loket 1',
+            'loket' => 'Loket 2',
             'status' => 'aktif'
+        ]);
+
+        DB::table('layanan_loket')->insert([
+            'layanan_id' => 1,
+            'loket_id' => 1            
+        ]);
+
+        DB::table('layanan_loket')->insert([
+            'layanan_id' => 2,
+            'loket_id' => 1,            
         ]);
     }
 }

@@ -3,50 +3,92 @@ Loket
     <option value="<?= route('panggil') ?>">-PILIH LOKET-</option>
     <?php foreach ($lokets as $loket) : ?>
         <?php foreach ($loket->layanans as $layanan) : ?>
-            <option value="<?= route('panggil', ['layanan_id' => $layanan->id, 'loket_id' => $loket->id]) ?>" <?= $layanan->id === $layanan_id && $loket->id === $loket_id ? 'selected' : '' ?>><?= $loket->loket . ' - ' .  $layanan->layanan ?></option>
+            <option value="<?= route('panggil', ['layanan_id' => $layanan->id, 'loket_id' => $loket->id]) ?>" <?= $layanan->id === $layanan_id && $loket->id === $loket_id ? 'selected' : '' ?>><?= $layanan->layanan . ' - ' . $loket->loket ?></option>
         <?php endforeach ?>
     <?php endforeach ?>
 </select>
 <span id="clock"></span> | <span id="countdown"></span>
 <hr>
-Menunggu
 <table>
-    <tr>
-        <th>Layanan</th>
-        <th>Tanggal</th>
-        <th>Nomor</th>
-        <th>Aksi</th>
+    <tr valign="top">
+        <td width="50%">
+            Menunggu
+            <table border="1">
+                <tr>
+                    <th>Layanan</th>
+                    <th>Tanggal Ambil</th>
+                    <th>Jam Ambil</th>
+                    <th>Nomor</th>
+                    <th>Aksi</th>
+                </tr>
+                <?php foreach ($antrean_menunggu as $antrean) : ?>
+                    <tr>
+                        <td><?= $antrean->layanan->layanan ?></td>
+                        <td><?= $antrean->tanggal_ambil ?></td>
+                        <td><?= $antrean->jam_ambil ?></td>
+                        <td><?= $antrean->nomor ?></td>
+                        <td>
+                            <a href="<?= route('panggil', ['layanan_id' => $layanan_id, 'loket_id' => $loket_id, 'antrean_id' => $antrean->id]) ?>">
+                                Panggil
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
+            </table>
+            Selesai
+            <table border="1">
+                <tr>
+                    <th>Layanan</th>
+                    <th>Tanggal Ambil</th>
+                    <th>Jam Ambil</th>
+                    <th>Nomor</th>
+                    <th>Aksi</th>
+                </tr>
+                <?php foreach ($antrean_selesai as $selesai) : ?>
+                    <tr>
+                        <td><?= $selesai->layanan->layanan ?></td>
+                        <td><?= $selesai->tanggal_ambil ?></td>
+                        <td><?= $selesai->jam_ambil ?></td>
+                        <td><?= $selesai->nomor ?></td>
+                        <td>
+                            <a href="<?= route('panggil', ['layanan_id' => $layanan_id, 'loket_id' => $loket_id, 'antrean_id' => $selesai->id]) ?>">
+                                Panggil Lagi
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
+            </table>
+        </td>
+        <td width="50%">
+            Memanggil
+            <table border="1">
+                <tr>
+                    <th>Layanan</th>
+                    <th>Loket</th>
+                    <th>Tanggal Panggil</th>
+                    <th>Jam Panggil</th>
+                    <th>Nomor</th>
+                    <th>Aksi</th>
+                </tr>
+                <?php foreach ($antrean_memanggil as $memanggil) : ?>
+                    <tr>
+                        <td><?= $memanggil->antrean->layanan->layanan ?></td>
+                        <td><?= $memanggil->loket->loket ?></td>
+                        <td><?= $memanggil->tanggal_panggil ?></td>
+                        <td><?= $memanggil->jam_panggil ?></td>
+                        <td><?= $memanggil->antrean->nomor ?></td>
+                        <td>
+                            <a href="<?= route('selesai', ['layanan_id' => $layanan_id, 'loket_id' => $loket_id, 'antrean_panggil_id' => $memanggil->id]) ?>">
+                                Selesai
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
+            </table>
+        </td>
     </tr>
-    <?php foreach ($antrean_menunggu as $antrean) : ?>
-        <tr>
-            <td><?= $antrean->layanan->layanan ?></td>
-            <td><?= $antrean->tanggal_ambil ?></td>
-            <td><?= $antrean->nomor ?></td>
-            <td>
-                <a href="<?= route('panggil', ['layanan_id' => $layanan_id, 'loket_id' => $loket_id, 'antrean_id' => $antrean->id]) ?>">
-                    Panggil
-                </a>
-            </td>
-        </tr>
-    <?php endforeach ?>
 </table>
-<hr>
-Memanggil
-<table>
-    <tr>
-        <th>Layanan</th>
-        <th>Tanggal</th>
-        <th>Nomor</th>
-    </tr>
-    <?php foreach ($antrean_memanggil as $antrean) : ?>
-        <tr>
-            <td><?= $antrean->layanan->layanan ?></td>
-            <td><?= $antrean->tanggal_ambil ?></td>
-            <td><?= $antrean->nomor ?></td>
-            <td></td>
-        </tr>
-    <?php endforeach ?>
-</table>
+
 <script>
     // Countdown function
     function countdownReload(seconds) {
@@ -93,6 +135,6 @@ Memanggil
     // Initial call to display the clock immediately
     updateClock();
 
-    // Start countdown with 10 seconds
-    countdownReload(10);
+    // Start countdown with 5 seconds
+    countdownReload(5);
 </script>

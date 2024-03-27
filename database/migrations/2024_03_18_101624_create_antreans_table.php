@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('layanan_id')->constrained();
             $table->date('tanggal_ambil');
-            $table->time('waktu_ambil');
+            $table->time('jam_ambil');
             $table->integer('nomor');
             $table->string('status');
             $table->timestamps();

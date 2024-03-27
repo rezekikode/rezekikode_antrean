@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('antrean_id')->constrained();
             $table->foreignId('loket_id')->constrained();
             $table->date('tanggal_panggil');
-            $table->time('waktu_panggil');
+            $table->time('jam_panggil');
             $table->string('status');
             $table->timestamps();
         });

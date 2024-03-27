@@ -17,6 +17,7 @@ use App\Models\Layanan;
 use App\Models\Lokasi;
 use App\Models\Loket;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -69,7 +70,7 @@ Route::get('ambil', function (Request $request) {
         $antrean = new Antrean();
         $antrean->layanan_id = $id;
         $antrean->tanggal_ambil = $dt->toDateString();
-        $antrean->waktu_ambil = $dt->toTimeString();
+        $antrean->jam_ambil = $dt->toTimeString();
         $antrean->nomor = Antrean::where('layanan_id', '=', $id)
             ->where('tanggal_ambil', '=', $dt->toDateString())
             ->max('nomor') + 1;
@@ -88,7 +89,7 @@ Route::get('panggil', function (Request $request) {
     $loket_id = (int) $request->input('loket_id');
     $antrean_id = (int) $request->input('antrean_id');
 
-    if ($antrean_id > 0) {
+    if ($layanan_id > 0 && $loket_id > 0 && $antrean_id > 0) {
         $dt = Carbon::now();
         $antrean = Antrean::find($antrean_id);
         $antrean->status = 'memanggil';
@@ -98,7 +99,7 @@ Route::get('panggil', function (Request $request) {
             $antreanPanggil->antrean_id = $antrean_id;
             $antreanPanggil->loket_id = $loket_id;
             $antreanPanggil->tanggal_panggil = $dt->toDateString();
-            $antreanPanggil->waktu_panggil = $dt->toTimeString();
+            $antreanPanggil->jam_panggil = $dt->toTimeString();
             $antreanPanggil->status = 'memanggil';
             $antreanPanggil->save();
         }
@@ -113,10 +114,37 @@ Route::get('panggil', function (Request $request) {
         ->take(1)
         ->get();
 
-    $antrean_memanggil = Antrean::where('status', '=', 'memanggil')
-        ->where('layanan_id', '=', $layanan_id)
-        ->orderBy('nomor')
+    $antrean_memanggil = AntreanPanggil::where('status', '=', 'memanggil')
+        ->orderBy('tanggal_panggil')
+        ->orderBy('jam_panggil')
         ->get();
 
-    return view('panggil/index', compact('lokets', 'antrean_menunggu', 'antrean_memanggil', 'layanan_id', 'loket_id'));
+    $antrean_selesai = Antrean::where('layanan_id', '=', $layanan_id)
+        ->where('status', '=', 'selesai')
+        ->whereHas('panggils', function (Builder $query) use ($loket_id) {
+            $query->where('loket_id', '=', $loket_id);
+        })
+        ->orderBy('tanggal_ambil', 'DESC')
+        ->orderBy('jam_ambil', 'DESC')
+        ->orderBy('nomor', 'DESC')
+        ->get();
+
+    return view('panggil/index', compact('lokets', 'layanan_id', 'loket_id', 'antrean_menunggu', 'antrean_memanggil', 'antrean_selesai'));
 })->name('panggil');
+
+Route::get('selesai', function (Request $request) {
+    $layanan_id = (int) $request->input('layanan_id');
+    $loket_id = (int) $request->input('loket_id');
+    $antrean_panggil_id = (int) $request->input('antrean_panggil_id');
+    if ($layanan_id > 0 && $loket_id > 0 && $antrean_panggil_id > 0) {
+        $antrean_panggil = AntreanPanggil::find($antrean_panggil_id);
+        $antrean_panggil->status = 'selesai';
+        $antrean_panggil->save();
+        if ($antrean_panggil) {
+            $antrean = Antrean::find($antrean_panggil->antrean_id);
+            $antrean->status = 'selesai';
+            $antrean->save();
+        }
+    }
+    return redirect()->route('panggil', ['layanan_id' => $layanan_id, 'loket_id' => $loket_id]);
+})->name('selesai');

@@ -111,7 +111,7 @@ Route::get('panggil', function (Request $request) {
     $antrean_menunggu = Antrean::where('status', '=', 'menunggu')
         ->where('layanan_id', '=', $layanan_id)
         ->orderBy('nomor')
-        ->take(1)
+        //->take(1)
         ->get();
 
     $antrean_memanggil = AntreanPanggil::where('status', '=', 'memanggil')

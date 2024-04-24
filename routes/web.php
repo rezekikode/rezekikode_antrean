@@ -132,6 +132,7 @@ Route::get('panggil', function (Request $request) {
     return view('panggil/index', compact('lokets', 'layanan_id', 'loket_id', 'antrean_menunggu', 'antrean_memanggil', 'antrean_selesai'));
 })->name('panggil');
 
+//--- Selesai Panggil
 Route::get('selesai', function (Request $request) {
     $layanan_id = (int) $request->input('layanan_id');
     $loket_id = (int) $request->input('loket_id');
@@ -148,3 +149,10 @@ Route::get('selesai', function (Request $request) {
     }
     return redirect()->route('panggil', ['layanan_id' => $layanan_id, 'loket_id' => $loket_id]);
 })->name('selesai');
+
+//--- Tampil
+Route::get('tampil', function (Request $request) {
+    $layanans = Layanan::where('status', '=', 'aktif')
+        ->get();
+    return view('tampil/index', compact('layanans'));
+})->name('tampil');

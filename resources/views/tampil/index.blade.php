@@ -34,7 +34,8 @@
                                 ->first();
                             ?>
                             <?php if ($antrean_menunggu) : ?>
-                                <h5 class="card-text text-center"><?= $antrean_menunggu->nomor ?></h5>
+                                <h4 class="card-text text-center"><?= $antrean_menunggu->nomor ?></h4>
+                                <h6 class="card-text text-center"><?= $antrean_menunggu->tanggal_ambil ?></h6>
                             <?php else : ?>
                                 <h5 class="card-text text-center">0</h5>
                             <?php endif ?>
@@ -95,7 +96,7 @@
         updateClock();
 
         // Start countdown with 5 seconds
-        countdownReload(1);
+        countdownReload(5);
     </script>
 </body>
 

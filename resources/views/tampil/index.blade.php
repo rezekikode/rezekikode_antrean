@@ -21,9 +21,7 @@
                 <div class="col-md-3">
                     <div class="card">
                         <div class="card-body">
-                            <a href="<?= route('ambil', ['id' => $layanan->id]) ?>">
-                                <h3 id="queue-number" class="card-text text-center"><?= $layanan->layanan ?></h3>
-                            </a>
+                            <h3 class="card-text text-center"><?= $layanan->layanan ?></h3>
                             <?php
                             $dt = Illuminate\Support\Carbon::now();
                             $antrean_menunggu = App\Models\Antrean::where(function ($query) {
@@ -32,7 +30,7 @@
                             })
                                 ->where('layanan_id', '=', $layanan->id)
                                 ->whereDate('tanggal_ambil', '=', $dt->toDateString())
-                                ->orderBy('nomor', 'DESC')
+                                ->orderBy('updated_at', 'DESC')
                                 ->first();
                             ?>
                             <?php if ($antrean_menunggu) : ?>

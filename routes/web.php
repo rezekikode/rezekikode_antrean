@@ -89,8 +89,9 @@ Route::get('panggil', function (Request $request) {
     $loket_id = (int) $request->input('loket_id');
     $antrean_id = (int) $request->input('antrean_id');
 
-    if ($layanan_id > 0 && $loket_id > 0 && $antrean_id > 0) {
-        $dt = Carbon::now();
+    $dt = Carbon::now();
+
+    if ($layanan_id > 0 && $loket_id > 0 && $antrean_id > 0) {        
         $antrean = Antrean::find($antrean_id);
         $antrean->status = 'memanggil';
         $antrean->save();
@@ -110,17 +111,20 @@ Route::get('panggil', function (Request $request) {
 
     $antrean_menunggu = Antrean::where('status', '=', 'menunggu')
         ->where('layanan_id', '=', $layanan_id)
+        ->where('tanggal_ambil', '=', $dt->toDateString())
         ->orderBy('nomor')
-        //->take(1)
+        ->take(1)
         ->get();
 
     $antrean_memanggil = AntreanPanggil::where('status', '=', 'memanggil')
+        ->where('tanggal_panggil', '=', $dt->toDateString())
         ->orderBy('tanggal_panggil')
         ->orderBy('jam_panggil')
         ->get();
 
     $antrean_selesai = Antrean::where('layanan_id', '=', $layanan_id)
         ->where('status', '=', 'selesai')
+        ->where('tanggal_ambil', '=', $dt->toDateString())
         ->whereHas('panggils', function (Builder $query) use ($loket_id) {
             $query->where('loket_id', '=', $loket_id);
         })

@@ -8,7 +8,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Admin Panel</a>
+        <a class="navbar-brand" href="#">Admin Antrean</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -21,7 +21,7 @@
                     <a class="nav-link" href="{{ route('admin.lokasi.index') }}">Lokasi</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Layanan</a>
+                    <a class="nav-link" href="{{ route('admin.layanan.index') }}">Layanan</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Antrean</a>

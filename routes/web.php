@@ -178,9 +178,15 @@ Route::prefix('admin')->group(function () {
         Route::delete('/{lokasi}', [LokasiController::class, 'destroy'])->name('admin.lokasi.destroy');
     });
 
-    Route::get('layanan', function () {
-        return view('admin/layanan/index');
-    })->name('admin.layanan');
+    Route::prefix('layanan')->group(function () {
+        Route::get('/', [LayananController::class, 'index'])->name('admin.layanan.index');
+        Route::get('/create', [LayananController::class, 'create'])->name('admin.layanan.create');
+        Route::post('/', [LayananController::class, 'store'])->name('admin.layanan.store');
+        Route::get('/{layanan}', [LayananController::class, 'show'])->name('admin.layanan.show');
+        Route::get('/{layanan}/edit', [LayananController::class, 'edit'])->name('admin.layanan.edit');
+        Route::put('/{layanan}', [LayananController::class, 'update'])->name('admin.layanan.update');
+        Route::delete('/{layanan}', [LayananController::class, 'destroy'])->name('admin.layanan.destroy');
+    });
 
     Route::get('loket', function () {
         return view('admin/loket/index');

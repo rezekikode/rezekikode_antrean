@@ -13,7 +13,8 @@ class LayananController extends Controller
      */
     public function index()
     {
-        //
+        $layanans = Layanan::all();
+        return view('admin.layanan.index', compact('layanans'));
     }
 
     /**
@@ -21,7 +22,7 @@ class LayananController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.layanan.create');
     }
 
     /**
@@ -29,7 +30,14 @@ class LayananController extends Controller
      */
     public function store(StoreLayananRequest $request)
     {
-        //
+        $validatedData = $request->validate([
+            'layanan' => 'required|string|max:255',
+        ]);
+
+        $layanan = new Layanan;
+        $layanan->layanan = $validatedData['layanan'];
+        $layanan->save();
+        return redirect()->route('layanan.index')->with('success', 'Layanan berhasil ditambahkan');
     }
 
     /**
@@ -37,7 +45,7 @@ class LayananController extends Controller
      */
     public function show(Layanan $layanan)
     {
-        //
+        return view('admin.layanan.show', compact('layanan'));
     }
 
     /**
@@ -45,7 +53,7 @@ class LayananController extends Controller
      */
     public function edit(Layanan $layanan)
     {
-        //
+        return view('admin.layanan.edit', compact('layanan'));
     }
 
     /**
@@ -53,7 +61,12 @@ class LayananController extends Controller
      */
     public function update(UpdateLayananRequest $request, Layanan $layanan)
     {
-        //
+        $validatedData = $request->validate([
+            'layanan' => 'required|string|max:255',
+        ]);
+        $layanan->layanan = $validatedData['layanan'];
+        $layanan->save();
+        return redirect()->route('layanan.index')->with('success', 'Layanan berhasil diperbarui');
     }
 
     /**
@@ -62,5 +75,7 @@ class LayananController extends Controller
     public function destroy(Layanan $layanan)
     {
         //
+        $layanan->delete();
+        return redirect()->route('layanan.index')->with('success', 'Layanan berhasil dihapus');
     }
 }

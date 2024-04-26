@@ -179,9 +179,15 @@ Route::prefix('admin')->group(function () {
         Route::delete('/{layanan}', [LayananController::class, 'destroy'])->name('admin.layanan.destroy');
     });
 
-    Route::get('loket', function () {
-        return view('admin/loket/index');
-    })->name('admin.loket');
+    Route::prefix('loket')->group(function () {
+        Route::get('/', [LoketController::class, 'index'])->name('admin.loket.index');
+        Route::get('/create', [LoketController::class, 'create'])->name('admin.loket.create');
+        Route::post('/', [LoketController::class, 'store'])->name('admin.loket.store');
+        Route::get('/{loket}', [LoketController::class, 'show'])->name('admin.loket.show');
+        Route::get('/{loket}/edit', [LoketController::class, 'edit'])->name('admin.loket.edit');
+        Route::put('/{loket}', [LoketController::class, 'update'])->name('admin.loket.update');
+        Route::delete('/{loket}', [LoketController::class, 'destroy'])->name('admin.loket.destroy');
+    });
 
     Route::get('antrean', function () {
         return view('admin/antrean/index');

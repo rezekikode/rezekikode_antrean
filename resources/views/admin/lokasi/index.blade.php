@@ -6,6 +6,12 @@
 
         <a href="{{ route('admin.lokasi.create') }}" class="btn btn-primary">Tambah Lokasi</a>
 
+        @if (session('success'))
+            <div class="alert alert-success mt-3">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <table class="table mt-3">
             <thead>
                 <tr>

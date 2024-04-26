@@ -13,7 +13,7 @@ class LoketController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.loket.index');
     }
 
     /**
@@ -21,7 +21,7 @@ class LoketController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.loket.create');
     }
 
     /**
@@ -29,7 +29,16 @@ class LoketController extends Controller
      */
     public function store(StoreLoketRequest $request)
     {
-        //
+        $validatedData = $request->validate([
+            'loket' => 'required|string|max:255',
+            'status' => 'required|string',
+        ]);
+
+        $loket = new Loket;
+        $loket->loket = $validatedData['loket'];
+        $loket->status = $validatedData['status'];
+        $loket->save();
+        return redirect()->route('admin.loket.index')->with('success', 'Loket berhasil ditambahkan');
     }
 
     /**
@@ -37,7 +46,7 @@ class LoketController extends Controller
      */
     public function show(Loket $loket)
     {
-        //
+        return view('admin.loket.show', compact('loket'));
     }
 
     /**
@@ -45,7 +54,7 @@ class LoketController extends Controller
      */
     public function edit(Loket $loket)
     {
-        //
+        return view('admin.loket.edit', compact('loket'));
     }
 
     /**
@@ -53,7 +62,15 @@ class LoketController extends Controller
      */
     public function update(UpdateLoketRequest $request, Loket $loket)
     {
-        //
+        $validatedData = $request->validate([
+            'loket' => 'required|string|max:255',
+            'status' => 'required|string',
+        ]);
+
+        $loket->loket = $validatedData['loket'];
+        $loket->status = $validatedData['status'];
+        $loket->save();
+        return redirect()->route('admin.loket.index')->with('success', 'Loket berhasil diperbarui');
     }
 
     /**
@@ -61,6 +78,7 @@ class LoketController extends Controller
      */
     public function destroy(Loket $loket)
     {
-        //
+        $loket->delete();
+        return redirect()->route('admin.loket.index')->with('success', 'Loket berhasil dihapus');
     }
 }

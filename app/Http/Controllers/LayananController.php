@@ -59,7 +59,8 @@ class LayananController extends Controller
      */
     public function edit(Layanan $layanan)
     {
-        return view('admin.layanan.edit', compact('layanan'));
+        $lokasis = Lokasi::all();
+        return view('admin.layanan.edit', compact('layanan', 'lokasis'));
     }
 
     /**
@@ -68,9 +69,13 @@ class LayananController extends Controller
     public function update(UpdateLayananRequest $request, Layanan $layanan)
     {
         $validatedData = $request->validate([
+            'lokasi_id' => 'required|integer|exists:lokasis,id',
             'layanan' => 'required|string|max:255',
+            'status' => 'required|string',
         ]);
+        $layanan->lokasi_id = $validatedData['lokasi_id'];
         $layanan->layanan = $validatedData['layanan'];
+        $layanan->status = $validatedData['status'];
         $layanan->save();
         return redirect()->route('admin.layanan.index')->with('success', 'Layanan berhasil diperbarui');
     }

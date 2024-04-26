@@ -21,6 +21,9 @@
                     <a class="nav-link" href="{{ route('admin.lokasi.index') }}">Lokasi</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.loket.index') }}">Loket</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.layanan.index') }}">Layanan</a>
                 </li>
                 <li class="nav-item">

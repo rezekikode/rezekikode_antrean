@@ -21,7 +21,7 @@
 
         <div class="form-group">
             <label for="layanan">Layanan</label>
-            <input type="text" name="layanan" id="layanan" class="form-control" required>
+            <input type="text" name="layanan" id="layanan" class="form-control">
             @error('layanan')
             <span class="text-danger">{{ $message }}</span>
             @enderror

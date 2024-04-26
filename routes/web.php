@@ -160,3 +160,37 @@ Route::get('tampil', function (Request $request) {
         ->get();
     return view('tampil/index', compact('layanans'));
 })->name('tampil');
+
+
+//--- Admin
+Route::prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return view('admin/index');
+    })->name('admin');
+
+    Route::prefix('lokasi')->group(function () {
+        Route::get('/', [LokasiController::class, 'index'])->name('admin.lokasi.index');
+        Route::get('/create', [LokasiController::class, 'create'])->name('admin.lokasi.create');
+        Route::post('/', [LokasiController::class, 'store'])->name('admin.lokasi.store');
+        Route::get('/{lokasi}', [LokasiController::class, 'show'])->name('admin.lokasi.show');
+        Route::get('/{lokasi}/edit', [LokasiController::class, 'edit'])->name('admin.lokasi.edit');
+        Route::put('/{lokasi}', [LokasiController::class, 'update'])->name('admin.lokasi.update');
+        Route::delete('/{lokasi}', [LokasiController::class, 'destroy'])->name('admin.lokasi.destroy');
+    });
+
+    Route::get('layanan', function () {
+        return view('admin/layanan/index');
+    })->name('admin.layanan');
+
+    Route::get('loket', function () {
+        return view('admin/loket/index');
+    })->name('admin.loket');
+
+    Route::get('antrean', function () {
+        return view('admin/antrean/index');
+    })->name('admin.antrean');
+
+    Route::get('antrean-panggil', function () {
+        return view('admin/antrean-panggil/index');
+    })->name('admin.antrean-panggil');
+});

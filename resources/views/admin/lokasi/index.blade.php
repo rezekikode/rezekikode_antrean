@@ -11,6 +11,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nama Lokasi</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -19,6 +20,7 @@
                     <tr>
                         <td>{{ $lokasi->id }}</td>
                         <td>{{ $lokasi->lokasi }}</td>
+                        <td>{{ $lokasi->status }}</td>
                         <td>
                             <a href="{{ route('lokasi.edit', $lokasi->id) }}" class="btn btn-sm btn-primary">Edit</a>
                             <form action="{{ route('lokasi.destroy', $lokasi->id) }}" method="POST" class="d-inline">

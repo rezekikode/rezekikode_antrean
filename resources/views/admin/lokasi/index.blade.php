@@ -22,8 +22,8 @@
                         <td>{{ $lokasi->lokasi }}</td>
                         <td>{{ $lokasi->status }}</td>
                         <td>
-                            <a href="{{ route('lokasi.edit', $lokasi->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                            <form action="{{ route('lokasi.destroy', $lokasi->id) }}" method="POST" class="d-inline">
+                            <a href="{{ route('admin.lokasi.edit', $lokasi->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                            <form action="{{ route('admin.lokasi.destroy', $lokasi->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger">Hapus</button>

@@ -53,15 +53,6 @@ Route::prefix('collection')->group(function () {
     });
 });
 
-//--- Resource
-Route::prefix('resource')->group(function () {
-    Route::resource('lokasi', LokasiController::class);
-    Route::resource('layanan', LayananController::class);
-    Route::resource('loket', LoketController::class);
-    Route::resource('antrean', AntreanController::class);
-    Route::resource('antrean-panggil', AntreanPanggilController::class);
-});
-
 //--- Ambil
 Route::get('ambil', function (Request $request) {
     $id = $request->input('id');

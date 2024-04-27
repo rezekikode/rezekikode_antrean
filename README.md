@@ -9,4 +9,6 @@ Sistem
 </ul>
 
 Referensi
-https://cosme.dev/post/using-pivot-tables-in-laravel-the-complete-guide-to-custom-intermediary-tables-in-manytomany-relationships
+<ul>
+<li>https://cosme.dev/post/using-pivot-tables-in-laravel-the-complete-guide-to-custom-intermediary-tables-in-manytomany-relationships</li>
+</ul>

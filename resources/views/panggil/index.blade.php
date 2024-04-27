@@ -41,7 +41,12 @@ Loket
                         <td><?= $antrean->jam_ambil ?></td>
                         <td><?= $antrean->nomor ?></td>
                         <td>
-                            <a href="<?= route('panggil', ['layanan_id' => $layanan_id, 'loket_id' => $loket_id, 'antrean_id' => $antrean->id]) ?>">
+                            <a href="<?= route('panggil', [
+                                            'lokasi_id' => $lokasi_id,
+                                            'layanan_id' => $layanan_id,
+                                            'loket_id' => $loket_id,
+                                            'antrean_id' => $antrean->id
+                                        ]) ?>">
                                 Panggil
                             </a>
                         </td>
@@ -64,7 +69,12 @@ Loket
                         <td><?= $selesai->jam_ambil ?></td>
                         <td><?= $selesai->nomor ?></td>
                         <td>
-                            <a href="<?= route('panggil', ['layanan_id' => $layanan_id, 'loket_id' => $loket_id, 'antrean_id' => $selesai->id]) ?>">
+                            <a href="<?= route('panggil', [
+                                            'lokasi_id' => $lokasi_id,
+                                            'layanan_id' => $layanan_id,
+                                            'loket_id' => $loket_id,
+                                            'antrean_id' => $selesai->id
+                                        ]) ?>">
                                 Panggil Lagi
                             </a>
                         </td>
@@ -91,7 +101,12 @@ Loket
                         <td><?= $memanggil->jam_panggil ?></td>
                         <td><?= $memanggil->antrean->nomor ?></td>
                         <td>
-                            <a href="<?= route('selesai', ['layanan_id' => $layanan_id, 'loket_id' => $loket_id, 'antrean_panggil_id' => $memanggil->id]) ?>">
+                            <a href="<?= route('selesai', [
+                                            'lokasi_id' => $lokasi_id,
+                                            'layanan_id' => $layanan_id,
+                                            'loket_id' => $loket_id,
+                                            'antrean_panggil_id' => $memanggil->id
+                                        ]) ?>">
                                 Selesai
                             </a>
                         </td>

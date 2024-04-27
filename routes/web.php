@@ -59,6 +59,7 @@ Route::get('ambil', function (Request $request) {
     $dt = Carbon::now();
     if ($id > 0) {
         $antrean = new Antrean();
+        $antrean->lokasi_id = 1;
         $antrean->layanan_id = $id;
         $antrean->tanggal_ambil = $dt->toDateString();
         $antrean->jam_ambil = $dt->toTimeString();
@@ -90,6 +91,8 @@ Route::get('panggil', function (Request $request) {
         if ($antrean) {
             $antreanPanggil = new AntreanPanggil();
             $antreanPanggil->antrean_id = $antrean_id;
+            $antreanPanggil->lokasi_id = $lokasi_id;
+            $antreanPanggil->layanan_id = $layanan_id;
             $antreanPanggil->loket_id = $loket_id;
             $antreanPanggil->tanggal_panggil = $dt->toDateString();
             $antreanPanggil->jam_panggil = $dt->toTimeString();

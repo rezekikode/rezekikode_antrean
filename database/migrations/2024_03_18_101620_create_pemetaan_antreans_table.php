@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('pemetaan_antreans', function (Blueprint $table) {
             $table->foreignId('lokasi_id')->constrained();
             $table->foreignId('layanan_id')->constrained();
-            $table->foreignId('loket_id')->constrained();            
+            $table->foreignId('loket_id')->constrained();   
+            $table->string('status');         
             $table->timestamps();
             $table->primary(['lokasi_id', 'layanan_id', 'loket_id']);
         });

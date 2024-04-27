@@ -8,19 +8,6 @@
         @method('PUT')
 
         <div class="form-group">
-            <label for="lokasi">Lokasi</label>
-            <select class="form-control" id="lokasi_id" name="lokasi_id">
-            <option value="">Pilih Lokasi</option>
-            @foreach($lokasis as $lokasi)
-                <option value="{{ $lokasi->id }}" {{ $lokasi->id == $layanan->lokasi_id ? 'selected' : '' }}>{{ $lokasi->lokasi }}</option>
-            @endforeach
-            </select>
-            @error('lokasi_id')
-            <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div class="form-group">
             <label for="nama">Layanan</label>
             <input type="text" class="form-control" id="layanan" name="layanan" value="{{ $layanan->layanan }}">
             @error('layanan')

@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             LokasiSeeder::class,
             LayananSeeder::class,
             LoketSeeder::class,
+            PemetaanAntreanSeeder::class,
             AntreanSeeder::class,
             AntreanPanggilSeeder::class
         ]);

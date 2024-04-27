@@ -56,7 +56,7 @@ class LayananController extends Controller
      */
     public function edit(Layanan $layanan)
     {
-        return view('admin.layanan.edit');
+        return view('admin.layanan.edit', compact('layanan'));
     }
 
     /**

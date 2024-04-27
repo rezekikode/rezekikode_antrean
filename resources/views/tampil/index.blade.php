@@ -34,10 +34,10 @@
                                 ->first();
                             ?>
                             <?php if ($antrean_menunggu) : ?>
-                                <h4 class="card-text text-center"><?= $antrean_menunggu->nomor ?></h4>
+                                <h1 class="card-text text-center"><?= $antrean_menunggu->nomor ?></h1>
                                 <h6 class="card-text text-center"><?= $antrean_menunggu->tanggal_ambil ?></h6>
                             <?php else : ?>
-                                <h5 class="card-text text-center">0</h5>
+                                <h1 class="card-text text-center">0</h1>
                                 <h6 class="card-text text-center">-</h6>
                             <?php endif ?>
                         </div>

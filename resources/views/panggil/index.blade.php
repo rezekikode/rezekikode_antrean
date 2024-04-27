@@ -1,10 +1,25 @@
+Lokasi
+<select name="" id="" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+    <option value="<?= route('panggil') ?>">-Pilih Lokasi-</option>
+    <?php foreach ($lokasis as $lokasi) : ?>
+        <option value="<?= route('panggil', ['lokasi_id' => $lokasi->id, 'layanan_id' => $layanan_id, 'loket_id' => $loket_id]) ?>" <?= $lokasi->id === $lokasi_id ? 'selected' : '' ?>><?= $lokasi->lokasi ?></option>
+    <?php endforeach ?>
+</select>
 Layanan
 <select name="" id="" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-    <option value="<?= route('panggil') ?>">-PILIH LAYANAN-</option>
+    <option value="<?= route('panggil') ?>">-Pilih Layanan-</option>
     <?php foreach ($layanans as $layanan) : ?>
         <option value="<?= route('panggil', ['lokasi_id' => $lokasi_id, 'layanan_id' => $layanan->id, 'loket_id' => $loket_id]) ?>" <?= $layanan->id === $layanan_id ? 'selected' : '' ?>><?= $layanan->layanan ?></option>
     <?php endforeach ?>
 </select>
+Loket
+<select name="" id="" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+    <option value="<?= route('panggil') ?>">-Pilih Loket-</option>
+    <?php foreach ($lokets as $loket) : ?>
+        <option value="<?= route('panggil', ['lokasi_id' => $lokasi_id, 'layanan_id' => $layanan_id, 'loket_id' => $loket->id]) ?>" <?= $loket->id === $loket_id ? 'selected' : '' ?>><?= $loket->loket ?></option>
+    <?php endforeach ?>
+</select>
+<hr>
 <span id="clock"></span> | <span id="countdown"></span>
 <hr>
 <table>

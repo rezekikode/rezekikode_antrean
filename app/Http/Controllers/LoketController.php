@@ -13,7 +13,8 @@ class LoketController extends Controller
      */
     public function index()
     {
-        return view('admin.loket.index');
+        $lokets = Loket::all();
+        return view('admin.loket.index', compact('lokets'));
     }
 
     /**

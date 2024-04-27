@@ -14,19 +14,16 @@ class LayananSeeder extends Seeder
     public function run(): void
     {
         DB::table('layanans')->insert([
-            'lokasi_id' => 1,
             'layanan' => 'Pelanggan 1',
             'status' => 'aktif'
         ]);
 
         DB::table('layanans')->insert([
-            'lokasi_id' => 1,
             'layanan' => 'Pelanggan 2',
             'status' => 'aktif'
         ]);
 
         DB::table('layanans')->insert([
-            'lokasi_id' => 1,
             'layanan' => 'Pelanggan 3',
             'status' => 'tidak_aktif'
         ]);

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('antrean_panggils', function (Blueprint $table) {
             $table->id();
             $table->foreignId('antrean_id')->constrained();
+            $table->foreignId('lokasi_id')->constrained();
+            $table->foreignId('layanan_id')->constrained();
             $table->foreignId('loket_id')->constrained();
             $table->date('tanggal_panggil');
             $table->time('jam_panggil');

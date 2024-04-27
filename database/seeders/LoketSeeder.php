@@ -22,15 +22,5 @@ class LoketSeeder extends Seeder
             'loket' => 'Loket 2',
             'status' => 'aktif'
         ]);
-
-        DB::table('layanan_loket')->insert([
-            'layanan_id' => 1,
-            'loket_id' => 1            
-        ]);
-
-        DB::table('layanan_loket')->insert([
-            'layanan_id' => 2,
-            'loket_id' => 1,            
-        ]);
     }
 }

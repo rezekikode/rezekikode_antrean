@@ -18,7 +18,7 @@
         </div>
         <div class="row">
             <?php foreach ($layanans as $layanan) : ?>
-                <div class="col-md-3">
+                <div class="col-md-3 mt-1">
                     <div class="card">
                         <div class="card-body">
                             <h3 class="card-text text-center"><?= $layanan->layanan ?></h3>

@@ -16,7 +16,6 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Lokasi</th>
                     <th>Layanan</th>
                     <th>Status</th>
                     <th>Aksi</th>
@@ -26,7 +25,6 @@
                 @foreach ($layanans as $layanan)
                     <tr>
                         <td>{{ $layanan->id }}</td>
-                        <td>{{ $layanan->lokasi->lokasi }}</td>
                         <td>{{ $layanan->layanan }}</td>
                         <td>{{ $layanan->status }}</td>
                         <td>

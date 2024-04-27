@@ -14,7 +14,7 @@ class LayananController extends Controller
      */
     public function index()
     {
-        $layanans = Layanan::with('lokasi')->get();
+        $layanans = Layanan::all();
         return view('admin.layanan.index', compact('layanans'));
     }
 
@@ -23,8 +23,7 @@ class LayananController extends Controller
      */
     public function create()
     {
-        $lokasis = Lokasi::all();
-        return view('admin.layanan.create', compact('lokasis'));
+        return view('admin.layanan.create');
     }
 
     /**
@@ -33,13 +32,11 @@ class LayananController extends Controller
     public function store(StoreLayananRequest $request)
     {
         $validatedData = $request->validate([
-            'lokasi_id' => 'required|integer|exists:lokasis,id',
             'layanan' => 'required|string|max:255',
             'status' => 'required|string',
         ]);
 
         $layanan = new Layanan;
-        $layanan->lokasi_id = $validatedData['lokasi_id'];
         $layanan->layanan = $validatedData['layanan'];
         $layanan->status = $validatedData['status'];
         $layanan->save();
@@ -59,8 +56,7 @@ class LayananController extends Controller
      */
     public function edit(Layanan $layanan)
     {
-        $lokasis = Lokasi::all();
-        return view('admin.layanan.edit', compact('layanan', 'lokasis'));
+        return view('admin.layanan.edit');
     }
 
     /**
@@ -69,11 +65,9 @@ class LayananController extends Controller
     public function update(UpdateLayananRequest $request, Layanan $layanan)
     {
         $validatedData = $request->validate([
-            'lokasi_id' => 'required|integer|exists:lokasis,id',
             'layanan' => 'required|string|max:255',
             'status' => 'required|string',
         ]);
-        $layanan->lokasi_id = $validatedData['lokasi_id'];
         $layanan->layanan = $validatedData['layanan'];
         $layanan->status = $validatedData['status'];
         $layanan->save();

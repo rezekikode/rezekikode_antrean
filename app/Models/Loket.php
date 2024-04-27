@@ -11,8 +11,4 @@ class Loket extends Model
 {
     use HasFactory;
 
-    public function layanans(): BelongsToMany
-    {
-        return $this->belongsToMany(Layanan::class)->withTimestamps();
-    }
 }

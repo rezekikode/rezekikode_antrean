@@ -115,6 +115,7 @@ Route::get('panggil', function (Request $request) {
     $lokets = Loket::all();
 
     $antrean_menunggu = Antrean::where('status', '=', 'menunggu')
+        ->where('lokasi_id', '=', $lokasi_id)
         ->where('layanan_id', '=', $layanan_id)
         ->where('tanggal_ambil', '=', $dt->toDateString())
         ->orderBy('nomor')
@@ -122,17 +123,17 @@ Route::get('panggil', function (Request $request) {
         ->get();
 
     $antrean_memanggil = AntreanPanggil::where('status', '=', 'memanggil')
+        ->where('lokasi_id', '=', $lokasi_id)
+        ->where('layanan_id', '=', $layanan_id)
         ->where('tanggal_panggil', '=', $dt->toDateString())
         ->orderBy('tanggal_panggil')
         ->orderBy('jam_panggil')
         ->get();
 
-    $antrean_selesai = Antrean::where('layanan_id', '=', $layanan_id)
-        ->where('status', '=', 'selesai')
+    $antrean_selesai = Antrean::where('status', '=', 'selesai')
+        ->where('lokasi_id', '=', $lokasi_id)
+        ->where('layanan_id', '=', $layanan_id)
         ->where('tanggal_ambil', '=', $dt->toDateString())
-        ->whereHas('panggils', function (Builder $query) use ($loket_id) {
-            $query->where('loket_id', '=', $loket_id);
-        })
         ->orderBy('tanggal_ambil', 'DESC')
         ->orderBy('jam_ambil', 'DESC')
         ->orderBy('nomor', 'DESC')

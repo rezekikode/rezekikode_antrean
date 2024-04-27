@@ -7,19 +7,6 @@
         @csrf
 
         <div class="form-group">
-            <label for="lokasi_id">Lokasi:</label>
-            <select name="lokasi_id" id="lokasi_id" class="form-control">
-                <option value="">Pilih Lokasi</option>
-                @foreach($lokasis as $lokasi)
-                    <option value="{{ $lokasi->id }}">{{ $lokasi->lokasi }}</option>
-                @endforeach
-            </select>
-            @error('lokasi_id')
-            <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div class="form-group">
             <label for="layanan">Layanan</label>
             <input type="text" name="layanan" id="layanan" class="form-control">
             @error('layanan')

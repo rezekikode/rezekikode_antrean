@@ -24,7 +24,11 @@ class PemetaanAntreanController extends Controller
         $lokasis = Lokasi::all();
         $layanans = Layanan::all();
         $lokets = Loket::all();
-        return view('admin.pemetaan-antrean.create', compact('lokasis', 'layanans', 'lokets'));
+        return view('admin.pemetaan-antrean.create', compact(
+            'lokasis', 
+            'layanans', 
+            'lokets'
+        ));
     }
 
     public function store(StorePemetaanAntreanRequest $request)
@@ -56,7 +60,12 @@ class PemetaanAntreanController extends Controller
         $lokasis = Lokasi::all();
         $layanans = Layanan::all();
         $lokets = Loket::all();
-        return view('admin.pemetaan-antrean.edit', compact('pemetaanAntrean', 'lokasis', 'layanans', 'lokets'));
+        return view('admin.pemetaan-antrean.edit', compact(
+            'pemetaanAntrean', 
+            'lokasis', 
+            'layanans', 
+            'lokets'
+        ));
     }
 
     public function update(UpdatePemetaanAntreanRequest $request, PemetaanAntrean $pemetaanAntrean)

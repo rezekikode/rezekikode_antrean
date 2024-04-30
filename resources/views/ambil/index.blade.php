@@ -15,7 +15,7 @@
         <h1 class="text-center">Ambil Antrean</h1>
         <div class="row">
             <?php foreach ($layanans as $layanan) : ?>
-                <div class="col-md-3">
+                <div class="col-md-3 mb-2">
                     <div class="card">
                         <div class="card-body">
                             <a href="<?= route('ambil', ['id' => $layanan->id]) ?>">

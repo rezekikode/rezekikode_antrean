@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StorePemetaanAntreanRequest;
+use App\Http\Requests\UpdatePemetaanAntreanRequest;
+use App\Models\Layanan;
+use App\Models\Lokasi;
+use App\Models\Loket;
+use App\Models\PemetaanAntrean;
 
 class PemetaanAntreanController extends Controller
 {
@@ -10,36 +15,72 @@ class PemetaanAntreanController extends Controller
 
     public function index()
     {
-        // Kode untuk menampilkan halaman index
+        $pemetaanAntreans = PemetaanAntrean::all();
+        return view('admin.pemetaan-antrean.index', compact('pemetaanAntreans'));
     }
 
     public function create()
     {
-        // Kode untuk menampilkan halaman create
+        $lokasis = Lokasi::all();
+        $layanans = Layanan::all();
+        $lokets = Loket::all();
+        return view('admin.pemetaan-antrean.create', compact('lokasis', 'layanans', 'lokets'));
     }
 
-    public function store(Request $request)
+    public function store(StorePemetaanAntreanRequest $request)
     {
-        // Kode untuk menyimpan data dari form screate
+        $validatedData = $request->validate([
+            'lokasi_id' => 'required|integer',
+            'layanan_id' => 'required|integer',
+            'loket_id' => 'required|integer',
+            'status' => 'required|string',
+        ]);
+
+        $pemetaanAntrean = new PemetaanAntrean;
+        $pemetaanAntrean->lokasi_id = $validatedData['lokasi_id'];
+        $pemetaanAntrean->layanan_id = $validatedData['layanan_id'];
+        $pemetaanAntrean->loket_id = $validatedData['loket_id'];
+        $pemetaanAntrean->status = $validatedData['status'];
+        $pemetaanAntrean->save();
+
+        return redirect()->route('admin.pemetaan-antrean.index')->with('success', 'Pemetaan antrean berhasil ditambahkan');
     }
 
-    public function show($id)
+    public function show(PemetaanAntrean $pemetaanAntrean)
     {
-        // Kode untuk menampilkan data berdasarkan ID
+        return view('admin.pemetaan-antrean.show', compact('pemetaanAntrean'));
     }
 
-    public function edit($id)
+    public function edit(PemetaanAntrean $pemetaanAntrean)
     {
-        // Kode untuk menampilkan halaman edit
+        $lokasis = Lokasi::all();
+        $layanans = Layanan::all();
+        $lokets = Loket::all();
+        return view('admin.pemetaan-antrean.edit', compact('pemetaanAntrean', 'lokasis', 'layanans', 'lokets'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdatePemetaanAntreanRequest $request, PemetaanAntrean $pemetaanAntrean)
     {
-        // Kode untuk mengupdate data dari form edit
+        $validatedData = $request->validate([
+            'lokasi_id' => 'required|integer',
+            'layanan_id' => 'required|integer',
+            'loket_id' => 'required|integer',
+            'status' => 'required|string',
+        ]);
+
+        $pemetaanAntrean->lokasi_id = $validatedData['lokasi_id'];
+        $pemetaanAntrean->layanan_id = $validatedData['layanan_id'];
+        $pemetaanAntrean->loket_id = $validatedData['loket_id'];
+        $pemetaanAntrean->status = $validatedData['status'];
+        $pemetaanAntrean->save();
+
+        return redirect()->route('admin.pemetaan-antrean.index')->with('success', 'Pemetaan antrean berhasil diubah');
     }
 
-    public function destroy($id)
+    public function destroy(PemetaanAntrean $pemetaanAntrean)
     {
-        // Kode untuk menghapus data berdasarkan ID
+        $pemetaanAntrean->delete();
+
+        return redirect()->route('admin.pemetaan-antrean.index')->with('success', 'Pemetaan antrean berhasil dihapus');
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\AntreanPanggilController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\LoketController;
+use App\Http\Controllers\PemetaanAntreanController;
 use App\Http\Resources\AntreanCollection;
 use App\Http\Resources\AntreanPanggilCollection;
 use App\Http\Resources\LayananCollection;
@@ -219,11 +220,13 @@ Route::prefix('admin')->group(function () {
         Route::delete('/{loket}', [LoketController::class, 'destroy'])->name('admin.loket.destroy');
     });
 
-    Route::get('antrean', function () {
-        return view('admin/antrean/index');
-    })->name('admin.antrean');
-
-    Route::get('antrean-panggil', function () {
-        return view('admin/antrean-panggil/index');
-    })->name('admin.antrean-panggil');
+    Route::prefix('pemetaan-antrean')->group(function () {
+        Route::get('/', [PemetaanAntreanController::class, 'index'])->name('admin.pemetaan-antrean.index');
+        Route::get('/create', [PemetaanAntreanController::class, 'create'])->name('admin.pemetaan-antrean.create');
+        Route::post('/', [PemetaanAntreanController::class, 'store'])->name('admin.pemetaan-antrean.store');
+        Route::get('/{pemetaanAntrean}', [PemetaanAntreanController::class, 'show'])->name('admin.pemetaan-antrean.show');
+        Route::get('/{pemetaanAntrean}/edit', [PemetaanAntreanController::class, 'edit'])->name('admin.pemetaan-antrean.edit');
+        Route::put('/{pemetaanAntrean}', [PemetaanAntreanController::class, 'update'])->name('admin.pemetaan-antrean.update');
+        Route::delete('/{pemetaanAntrean}', [PemetaanAntreanController::class, 'destroy'])->name('admin.pemetaan-antrean.destroy');
+    });
 });

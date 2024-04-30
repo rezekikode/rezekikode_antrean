@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pemetaan_antreans', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('lokasi_id')->constrained();
             $table->foreignId('layanan_id')->constrained();
             $table->foreignId('loket_id')->constrained();   
             $table->string('status');         
             $table->timestamps();
-            $table->primary(['lokasi_id', 'layanan_id', 'loket_id']);
         });
     }
 

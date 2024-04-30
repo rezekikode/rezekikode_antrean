@@ -22,6 +22,14 @@
     </div>
     <div class="col">
         <div class="card">
+            <h5 class="card-header">Memanggil</h5>
+            <div class="card-body">
+                {{ $totalAntreanMemanggil }}
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
             <h5 class="card-header">Selesai</h5>
             <div class="card-body">
                 {{ $totalAntreanSelesai }}
@@ -55,6 +63,7 @@
 
     function updateClock() {
         var now = new Date();
+        var date = now.toDateString();
         var hours = now.getHours();
         var minutes = now.getMinutes();
         var seconds = now.getSeconds();
@@ -64,7 +73,7 @@
         minutes = (minutes < 10) ? '0' + minutes : minutes;
         seconds = (seconds < 10) ? '0' + seconds : seconds;
 
-        var timeString = hours + ':' + minutes + ':' + seconds;
+        var timeString = date + ' ' + hours + ':' + minutes + ':' + seconds;
 
         // Update the clock element
         $('#clock').text(timeString);

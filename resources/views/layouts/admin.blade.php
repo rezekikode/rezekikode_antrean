@@ -44,15 +44,17 @@
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
+                                [{{ auth()->user()->name }}]
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="{{ route('admin.profil') }}">Profil</a>                                
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <a class="dropdown-item" href="#">Logout</a>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
                             </ul>
                         </li>
                     </ul>

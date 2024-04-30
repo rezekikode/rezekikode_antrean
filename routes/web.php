@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\LoketController;
@@ -23,6 +24,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//--- Auth
+Route::get('login', function () {
+    return view('auth.login');
+})->name('login');
+
+Route::post('login', [CustomAuthController::class, 'authenticate'])->name('login');
+Route::post('logout', [CustomAuthController::class, 'logout'])->name('logout');
 
 //--- Collection
 Route::prefix('collection')->group(function () {
@@ -187,6 +196,14 @@ Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('admin/index');
     })->name('admin.index');
+
+    //--- profil
+    Route::get('/profil', function () {
+        return view('admin/profil');
+    })->name('admin.profil');
+
+    //--- profil update
+    Route::put('/profil', [CustomAuthController::class, 'updateProfil'])->name('admin.profil.update');
 
     //--- Dashboard
     Route::get('/dashboard', function () {

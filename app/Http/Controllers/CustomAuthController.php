@@ -45,4 +45,18 @@ class CustomAuthController extends Controller
  
         return redirect('/');
     }
+
+    //--- update profile
+    public function updateProfil(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
+        $user = Auth::user();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+        return redirect()->back()->with('success', 'Profile updated successfully');
+    }
 }

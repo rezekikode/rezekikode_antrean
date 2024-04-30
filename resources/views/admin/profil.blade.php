@@ -7,6 +7,12 @@
         @csrf
         @method('PUT')
 
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+
         <div class="form-group mb-3">
             <label for="name">{{ __('Nama') }}</label>
 

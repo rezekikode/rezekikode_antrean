@@ -186,51 +186,60 @@ Route::get('tampil', function (Request $request) {
 
 //--- Admin
 Route::prefix('admin')->group(function () {
+    //--- Index
     Route::get('/', function () {
         return view('admin/index');
     })->name('admin.index');
 
-    Route::get('/', function () {
+    //--- Dashboard
+    Route::get('/dashboard', function () {
         return view('admin/dashboard');
     })->name('admin.dashboard');
 
-    Route::prefix('lokasi')->group(function () {
-        Route::get('/', [LokasiController::class, 'index'])->name('admin.lokasi.index');
-        Route::get('/create', [LokasiController::class, 'create'])->name('admin.lokasi.create');
-        Route::post('/', [LokasiController::class, 'store'])->name('admin.lokasi.store');
-        Route::get('/{lokasi}', [LokasiController::class, 'show'])->name('admin.lokasi.show');
-        Route::get('/{lokasi}/edit', [LokasiController::class, 'edit'])->name('admin.lokasi.edit');
-        Route::put('/{lokasi}', [LokasiController::class, 'update'])->name('admin.lokasi.update');
-        Route::delete('/{lokasi}', [LokasiController::class, 'destroy'])->name('admin.lokasi.destroy');
-    });
+    //--- Master
+    Route::prefix('master')->group(function () {
+        //--- Lokasi
+        Route::prefix('lokasi')->group(function () {
+            Route::get('/', [LokasiController::class, 'index'])->name('admin.lokasi.index');
+            Route::get('/create', [LokasiController::class, 'create'])->name('admin.lokasi.create');
+            Route::post('/', [LokasiController::class, 'store'])->name('admin.lokasi.store');
+            Route::get('/{lokasi}', [LokasiController::class, 'show'])->name('admin.lokasi.show');
+            Route::get('/{lokasi}/edit', [LokasiController::class, 'edit'])->name('admin.lokasi.edit');
+            Route::put('/{lokasi}', [LokasiController::class, 'update'])->name('admin.lokasi.update');
+            Route::delete('/{lokasi}', [LokasiController::class, 'destroy'])->name('admin.lokasi.destroy');
+        });
 
-    Route::prefix('layanan')->group(function () {
-        Route::get('/', [LayananController::class, 'index'])->name('admin.layanan.index');
-        Route::get('/create', [LayananController::class, 'create'])->name('admin.layanan.create');
-        Route::post('/', [LayananController::class, 'store'])->name('admin.layanan.store');
-        Route::get('/{layanan}', [LayananController::class, 'show'])->name('admin.layanan.show');
-        Route::get('/{layanan}/edit', [LayananController::class, 'edit'])->name('admin.layanan.edit');
-        Route::put('/{layanan}', [LayananController::class, 'update'])->name('admin.layanan.update');
-        Route::delete('/{layanan}', [LayananController::class, 'destroy'])->name('admin.layanan.destroy');
-    });
+        //--- Layanan
+        Route::prefix('layanan')->group(function () {
+            Route::get('/', [LayananController::class, 'index'])->name('admin.layanan.index');
+            Route::get('/create', [LayananController::class, 'create'])->name('admin.layanan.create');
+            Route::post('/', [LayananController::class, 'store'])->name('admin.layanan.store');
+            Route::get('/{layanan}', [LayananController::class, 'show'])->name('admin.layanan.show');
+            Route::get('/{layanan}/edit', [LayananController::class, 'edit'])->name('admin.layanan.edit');
+            Route::put('/{layanan}', [LayananController::class, 'update'])->name('admin.layanan.update');
+            Route::delete('/{layanan}', [LayananController::class, 'destroy'])->name('admin.layanan.destroy');
+        });
 
-    Route::prefix('loket')->group(function () {
-        Route::get('/', [LoketController::class, 'index'])->name('admin.loket.index');
-        Route::get('/create', [LoketController::class, 'create'])->name('admin.loket.create');
-        Route::post('/', [LoketController::class, 'store'])->name('admin.loket.store');
-        Route::get('/{loket}', [LoketController::class, 'show'])->name('admin.loket.show');
-        Route::get('/{loket}/edit', [LoketController::class, 'edit'])->name('admin.loket.edit');
-        Route::put('/{loket}', [LoketController::class, 'update'])->name('admin.loket.update');
-        Route::delete('/{loket}', [LoketController::class, 'destroy'])->name('admin.loket.destroy');
-    });
+        //--- Loket
+        Route::prefix('loket')->group(function () {
+            Route::get('/', [LoketController::class, 'index'])->name('admin.loket.index');
+            Route::get('/create', [LoketController::class, 'create'])->name('admin.loket.create');
+            Route::post('/', [LoketController::class, 'store'])->name('admin.loket.store');
+            Route::get('/{loket}', [LoketController::class, 'show'])->name('admin.loket.show');
+            Route::get('/{loket}/edit', [LoketController::class, 'edit'])->name('admin.loket.edit');
+            Route::put('/{loket}', [LoketController::class, 'update'])->name('admin.loket.update');
+            Route::delete('/{loket}', [LoketController::class, 'destroy'])->name('admin.loket.destroy');
+        });
 
-    Route::prefix('pemetaan-antrean')->group(function () {
-        Route::get('/', [PemetaanAntreanController::class, 'index'])->name('admin.pemetaan-antrean.index');
-        Route::get('/create', [PemetaanAntreanController::class, 'create'])->name('admin.pemetaan-antrean.create');
-        Route::post('/', [PemetaanAntreanController::class, 'store'])->name('admin.pemetaan-antrean.store');
-        Route::get('/{pemetaanAntrean}', [PemetaanAntreanController::class, 'show'])->name('admin.pemetaan-antrean.show');
-        Route::get('/{pemetaanAntrean}/edit', [PemetaanAntreanController::class, 'edit'])->name('admin.pemetaan-antrean.edit');
-        Route::put('/{pemetaanAntrean}', [PemetaanAntreanController::class, 'update'])->name('admin.pemetaan-antrean.update');
-        Route::delete('/{pemetaanAntrean}', [PemetaanAntreanController::class, 'destroy'])->name('admin.pemetaan-antrean.destroy');
+        //--- Pemetaan Antrean
+        Route::prefix('pemetaan-antrean')->group(function () {
+            Route::get('/', [PemetaanAntreanController::class, 'index'])->name('admin.pemetaan-antrean.index');
+            Route::get('/create', [PemetaanAntreanController::class, 'create'])->name('admin.pemetaan-antrean.create');
+            Route::post('/', [PemetaanAntreanController::class, 'store'])->name('admin.pemetaan-antrean.store');
+            Route::get('/{pemetaanAntrean}', [PemetaanAntreanController::class, 'show'])->name('admin.pemetaan-antrean.show');
+            Route::get('/{pemetaanAntrean}/edit', [PemetaanAntreanController::class, 'edit'])->name('admin.pemetaan-antrean.edit');
+            Route::put('/{pemetaanAntrean}', [PemetaanAntreanController::class, 'update'])->name('admin.pemetaan-antrean.update');
+            Route::delete('/{pemetaanAntrean}', [PemetaanAntreanController::class, 'destroy'])->name('admin.pemetaan-antrean.destroy');
+        });
     });
 });

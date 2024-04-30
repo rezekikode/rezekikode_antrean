@@ -188,7 +188,11 @@ Route::get('tampil', function (Request $request) {
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('admin/index');
-    })->name('admin');
+    })->name('admin.index');
+
+    Route::get('/', function () {
+        return view('admin/dashboard');
+    })->name('admin.dashboard');
 
     Route::prefix('lokasi')->group(function () {
         Route::get('/', [LokasiController::class, 'index'])->name('admin.lokasi.index');

@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\AntreanController;
-use App\Http\Controllers\AntreanPanggilController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\LoketController;
@@ -18,7 +16,6 @@ use App\Models\Layanan;
 use App\Models\Lokasi;
 use App\Models\Loket;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -193,7 +190,22 @@ Route::prefix('admin')->group(function () {
 
     //--- Dashboard
     Route::get('/dashboard', function () {
-        return view('admin/dashboard');
+        $dt = Carbon::now();
+        $totalAntrean = Antrean::where('tanggal_ambil', '=', $dt->toDateString())->count();
+        $totalAntreanMenunggu = Antrean::where('status', '=', 'menunggu')
+            ->where('tanggal_ambil', '=', $dt->toDateString())
+            ->count();
+        $totalAntreanSelesai = Antrean::where('status', '=', 'selesai')
+            ->where('tanggal_ambil', '=', $dt->toDateString())
+            ->count();
+        return view(
+            'admin/dashboard',
+            compact(
+                'totalAntrean',
+                'totalAntreanMenunggu',
+                'totalAntreanSelesai'
+            )
+        );
     })->name('admin.dashboard');
 
     //--- Master

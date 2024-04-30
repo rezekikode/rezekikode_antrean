@@ -16,6 +16,7 @@
         <div class="text-center">
             <span id="clock"></span> | <span id="countdown"></span>
         </div>
+        <hr>
         <div class="row">
             <?php foreach ($layanans as $layanan) : ?>
                 <div class="col-md-3 mt-1">
@@ -75,6 +76,7 @@
 
         function updateClock() {
             var now = new Date();
+            var date = now.toDateString();
             var hours = now.getHours();
             var minutes = now.getMinutes();
             var seconds = now.getSeconds();
@@ -84,7 +86,7 @@
             minutes = (minutes < 10) ? '0' + minutes : minutes;
             seconds = (seconds < 10) ? '0' + seconds : seconds;
 
-            var timeString = hours + ':' + minutes + ':' + seconds;
+            var timeString = date + ' ' + hours + ':' + minutes + ':' + seconds;
 
             // Update the clock element
             document.getElementById('clock').textContent = timeString;

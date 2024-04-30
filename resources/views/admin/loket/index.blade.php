@@ -4,7 +4,7 @@
     <div class="container">
         <h1>Daftar Loket</h1>
 
-        <a href="{{ route('admin.loket.create') }}" class="btn btn-primary">Tambah Loket</a>
+        <a href="{{ route('admin.loket.create') }}" class="btn btn-sm btn-primary">Tambah Loket</a>
 
         @if (session('success'))
             <div class="alert alert-success mt-3">

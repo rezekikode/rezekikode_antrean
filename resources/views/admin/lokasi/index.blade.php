@@ -4,7 +4,7 @@
     <div class="container">
         <h1>Daftar Lokasi</h1>
 
-        <a href="{{ route('admin.lokasi.create') }}" class="btn btn-primary">Tambah Lokasi</a>
+        <a href="{{ route('admin.lokasi.create') }}" class="btn btn-sm btn-primary">Tambah Lokasi</a>
 
         @if (session('success'))
             <div class="alert alert-success mt-3">

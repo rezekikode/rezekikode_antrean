@@ -195,6 +195,9 @@ Route::prefix('admin')->group(function () {
         $totalAntreanMenunggu = Antrean::where('status', '=', 'menunggu')
             ->where('tanggal_ambil', '=', $dt->toDateString())
             ->count();
+        $totalAntreanMemanggil = Antrean::where('status', '=', 'memanggil')
+            ->where('tanggal_ambil', '=', $dt->toDateString())
+            ->count();
         $totalAntreanSelesai = Antrean::where('status', '=', 'selesai')
             ->where('tanggal_ambil', '=', $dt->toDateString())
             ->count();
@@ -203,6 +206,7 @@ Route::prefix('admin')->group(function () {
             compact(
                 'totalAntrean',
                 'totalAntreanMenunggu',
+                'totalAntreanMemanggil',
                 'totalAntreanSelesai'
             )
         );

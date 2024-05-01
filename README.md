@@ -26,4 +26,5 @@ Fitur Admin
 Referensi
 <ul>
 <li>https://cosme.dev/post/using-pivot-tables-in-laravel-the-complete-guide-to-custom-intermediary-tables-in-manytomany-relationships</li>
+<li>https://www.laratutorials.com/laravel-custom-login-and-registration-example/</li>
 </ul>

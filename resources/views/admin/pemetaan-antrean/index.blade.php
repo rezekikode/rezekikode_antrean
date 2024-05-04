@@ -27,9 +27,9 @@
             @foreach ($pemetaanAntreans as $pemetaanAntrean)
             <tr>
                 <td>{{ $pemetaanAntrean->id }}</td>
-                <td>{{ $pemetaanAntrean->lokasi_id }}</td>
-                <td>{{ $pemetaanAntrean->layanan_id }}</td>
-                <td>{{ $pemetaanAntrean->loket_id }}</td>
+                <td>{{ $pemetaanAntrean->lokasi_id }} - {{ $pemetaanAntrean->lokasi->lokasi }}</td>
+                <td>{{ $pemetaanAntrean->layanan_id }} - {{ $pemetaanAntrean->layanan->layanan }}</td>
+                <td>{{ $pemetaanAntrean->loket_id }} - {{ $pemetaanAntrean->loket->loket }}</td>
                 <td>{{ $pemetaanAntrean->status }}</td>
                 <td>
                     <a href="{{ route('admin.pemetaan-antrean.edit', $pemetaanAntrean->id) }}" class="btn btn-sm btn-primary">Edit</a>

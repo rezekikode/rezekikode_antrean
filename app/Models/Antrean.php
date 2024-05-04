@@ -12,6 +12,11 @@ class Antrean extends Model
 {
     use HasFactory;
 
+    public function lokasi(): BelongsTo
+    {
+        return $this->belongsTo(Lokasi::class);
+    }
+
     public function layanan(): BelongsTo
     {
         return $this->belongsTo(Layanan::class);

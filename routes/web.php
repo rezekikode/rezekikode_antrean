@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AntreanController;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\LokasiController;
@@ -274,5 +275,30 @@ Route::prefix('admin')->group(function () {
             Route::put('/{pemetaanAntrean}', [PemetaanAntreanController::class, 'update'])->name('admin.pemetaan-antrean.update');
             Route::delete('/{pemetaanAntrean}', [PemetaanAntreanController::class, 'destroy'])->name('admin.pemetaan-antrean.destroy');
         });
+    });
+
+    //--- Transaksi
+    Route::prefix('transaksi')->group(function () {
+        //--- Antrean
+        Route::prefix('antrean')->group(function () {
+            Route::get('/', [AntreanController::class, 'index'])->name('admin.antrean.index');
+            Route::get('/create', [AntreanController::class, 'create'])->name('admin.antrean.create');
+            Route::post('/', [AntreanController::class, 'store'])->name('admin.antrean.store');
+            Route::get('/{antrean}', [AntreanController::class, 'show'])->name('admin.antrean.show');
+            Route::get('/{antrean}/edit', [AntreanController::class, 'edit'])->name('admin.antrean.edit');
+            Route::put('/{antrean}', [AntreanController::class, 'update'])->name('admin.antrean.update');
+            Route::delete('/{antrean}', [AntreanController::class, 'destroy'])->name('admin.antrean.destroy');
+        });
+
+        //--- Antrean Panggil
+        // Route::prefix('antrean-panggil')->group(function () {
+        //     Route::get('/', [AntreanPanggilController::class, 'index'])->name('admin.antrean-panggil.index');
+        //     Route::get('/create', [AntreanPanggilController::class, 'create'])->name('admin.antrean-panggil.create');
+        //     Route::post('/', [AntreanPanggilController::class, 'store'])->name('admin.antrean-panggil.store');
+        //     Route::get('/{antreanPanggil}', [AntreanPanggilController::class, 'show'])->name('admin.antrean-panggil.show');
+        //     Route::get('/{antreanPanggil}/edit', [AntreanPanggilController::class, 'edit'])->name('admin.antrean-panggil.edit');
+        //     Route::put('/{antreanPanggil}', [AntreanPanggilController::class, 'update'])->name('admin.antrean-panggil.update');
+        //     Route::delete('/{antreanPanggil}', [AntreanPanggilController::class, 'destroy'])->name('admin.antrean-panggil.destroy');
+        // });
     });
 });
